@@ -1,0 +1,84 @@
+.login-signup-container {
+  background-color: #F2F0F3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-card,
+.signup-card {
+  background-color: #FFFFFF;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  padding: 0px 15px;
+}
+
+.app-name {
+  font-family: "Cinzel Decorative", serif;
+  margin-top: 30px;
+  margin-bottom: 0px;
+  color: #e76f51;
+}
+
+.app-description {
+  font-size: 20px;
+  margin-top: 5px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.email-input,
+.password-input,
+.fname-input,
+.cityState-input,
+.age-input,
+.pronouns-input,
+.gender-input,
+.orientation-input,
+.lookingFor-input {
+  padding: 10px 10px;
+  font-size: 16px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  margin-top: 15px;
+  width: 225px;
+}
+
+.gender-input,
+.orientation-input,
+.lookingFor-input {
+  color: rgb(117, 117, 117);
+  width: 247px;
+}
+
+.login-button,
+.sign-up-button {
+  padding: 8px 15px;
+  border-radius: 5px;
+  width: 245px;
+  font-size: 16px;
+  background-color: #2a9d8f;
+  border: none;
+  color: white;
+  margin-top: 15px;
+}
+
+.sign-up-link,
+.login-link {
+  margin-left: auto;
+  margin-top: 15px;
+  margin-right: 3px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  text-decoration: none;
+  /*color: #0000EE;*/
+  color: #2391eb;
+}
+
+.hidden {
+  display: none;
+}
