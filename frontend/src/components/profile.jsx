@@ -1,6 +1,8 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useUserStore } from '../store/user.js'
+import { useUserStore } from '../store/user.js';
+import Header from './header.jsx';
+import defaultImage from '../assets/default-profile-image.jpg';
 
 function Profile() {
   const [message, setMessage] = useState();
@@ -26,6 +28,9 @@ function Profile() {
   console.log(id)
   
   console.log(user);
+  if (!user.image) {
+    user.image = defaultImage;
+  };
 
   //console.log(JSON.parse(localStorage.getItem('user')));
 
@@ -36,6 +41,7 @@ function Profile() {
   // When have a logout button use logout function
   return(
     <>
+      <Header firstName={user.firstName} image={user.image}/>
       <p>{user.firstName}</p>
       <p>{id}</p>
       <p>{message}</p>
