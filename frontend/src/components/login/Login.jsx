@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUserStore } from '../store/user.js';
-import { useAuthContext } from '../hook/useAuthContext.jsx';
+import { useUserStore } from '../../store/user.js';
+import { useAuthContext } from '../../hook/useAuthContext.jsx';
  
 function Login() {
   const [newUser, setNewUser] = useState({
@@ -78,13 +78,14 @@ function Login() {
   }
 
   return(
-    <div className='login-signup-container'>
-      <h1 className='app-name'>
+    <div className='login-signup-container vh-100'>
+      <h1 className='app-name font-weight-bold'>
         Memraze
       </h1>
       <p className='app-description'>
         Share your passions and experiences with the world.
       </p>
+
       <div className='login-card js-login-card'>
           <input
             type='email'

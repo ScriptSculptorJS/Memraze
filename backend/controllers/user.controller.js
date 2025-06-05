@@ -12,45 +12,49 @@ export const createUser = async (req, res) => {
   console.log(req.body, 'with non-hashed password');
 
   try {
-    const exists = await User.findOne({ email: user.email });
+    console.log('are we here?');
 
-    if (!user.email || !user.password) {
-      alert('Please provide all fields')
+    if (user.email === '' || user.password === '') {
+      console.log('Please provide all fields')
     };
 
     if (!validator.isEmail(user.email)) {
-      alert('Email is not valid');
+      console.log('Email is not valid')
     }
+    const exists = await User.findOne({ email: user.email });
+
+    console.log('Do we see user already exists?', exists);
 
     if (exists) {
-      alert('Email already exists');
+      console.log('Email already exists');
+    } else {
+      // Generate salt and hash password
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(user.password, salt);
+
+      const newUser = new User({
+        ...user,
+        password: hashedPassword,
+      });
+
+      console.log(newUser, 'with hashed password now');
+
+      const newentry = await newUser.save();
+      console.log('Is id here?', newentry);
+
+      console.log('New user created. Please log in: ', newentry);
+
+      res.status(201).json({
+        user: newentry
+      })
     };
-
-    // Generate salt and hash password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(user.password, salt);
-
-    const newUser = new User({
-      ...user,
-      password: hashedPassword,
-    });
-
-    console.log(newUser, 'with hashed password now');
-
-    const newentry = await newUser.save();
-    console.log('Is id here?', newentry);
-
-    console.log('New user created. Please log in: ', newentry);
-
-    res.status(201).json({
-      user: newentry
-    })
 
   } catch (err) {
     if (err instanceof Error) {
       res.status(400).json({
         status: '400 Bad Request',
-        message: err.message
+        message: err.message,
+        success: 'Failed'
       })
 
     } else {

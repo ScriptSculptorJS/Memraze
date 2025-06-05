@@ -33,13 +33,7 @@
 
 .email-input,
 .password-input,
-.fname-input,
-.cityState-input,
-.age-input,
-.pronouns-input,
-.gender-input,
-.orientation-input,
-.lookingFor-input {
+.fname-input {
   padding: 10px 10px;
   font-size: 16px;
   border: 1px solid lightgray;
@@ -48,23 +42,16 @@
   width: 225px;
 }
 
-.gender-input,
-.orientation-input,
-.lookingFor-input {
-  color: rgb(117, 117, 117);
-  width: 247px;
-}
-
 .login-button,
 .sign-up-button {
   padding: 8px 15px;
   border-radius: 5px;
-  width: 245px;
+  width: 225px;
   font-size: 16px;
   background-color: #2a9d8f;
   border: none;
   color: white;
-  margin-top: 15px;
+  margin: 15px 15px 0px 15px ;
 }
 
 .sign-up-link,
@@ -77,6 +64,11 @@
   text-decoration: none;
   /*color: #0000EE;*/
   color: #2391eb;
+}
+
+.sign-up-link:hover,
+.login-link:hover {
+  cursor: pointer;
 }
 
 .hidden {

@@ -2,8 +2,8 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
-import './styles/login.css';
-import './styles/profile-header.css';
+import './components/header/profile-header.css';
+import './components/login/login.css';
 import { AuthContextProvider } from './hook/AuthContext.jsx';
 import App from './App.jsx'
 

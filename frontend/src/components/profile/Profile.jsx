@@ -1,8 +1,8 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useUserStore } from '../store/user.js';
-import Header from './header.jsx';
-import defaultImage from '../assets/default-profile-image.jpg';
+import { useUserStore } from '../../store/user.js';
+import Header from '../header/Header.jsx';
+import defaultImage from '../../assets/default-profile-image.jpg';
 
 function Profile() {
   const [message, setMessage] = useState();
