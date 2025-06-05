@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login.jsx';
 import Profile from './components/profile.jsx';
 
