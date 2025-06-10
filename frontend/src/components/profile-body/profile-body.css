@@ -1,29 +1,4 @@
-.tab-content-container {
+.tab-content-row {
+  margin: -3px;
   padding: 3px;
-}
-
-.tab-container {
-  /*background-color: #F2F0F3 !important;*/
-  background-color: white !important;
-  border-radius: 8px;
-  padding: 0px 5px 5px 5px !important;
-
-}
-
-.nav-link.active {
-  background-color: #2a9d8f !important;
-  color: white !important;
-}
-
-.nav-link {
-  background-color: white !important;
-  color: #2a9d8f !important;
-  border: .5px solid #2a9d8f !important;
-}
-
-.tab-info-container {
-  border-radius: 8px 0px 0px 8px;
-  border-left: 3px solid #F2F0F3;
-  /*background-color: white;*/
-  background-color: #f2f0f3;
 }

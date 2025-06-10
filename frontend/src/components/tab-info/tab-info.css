@@ -1,0 +1,10 @@
+.tab-info-container {
+  border-radius: 8px;
+  border-left: 3px solid #F2F0F3;
+  background-color: white !important;
+  padding: 17px 20px
+}
+
+.tab-text {
+  font-size: 13px;
+}

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useUserStore } from '../../store/user.js';
 import './profile.css';
 import Header from '../header/Header.jsx';
+import Logo from '../logo/Logo.jsx';
 import ProfileBody from '../profile-body/Profile-body.jsx';
 import defaultImage from '../../assets/default-profile-image.jpg';
 import Container from 'react-bootstrap/Container';
@@ -46,19 +47,14 @@ function Profile() {
   // When have a logout button use logout function
   return(
     <>
-      {/*<Header firstName={user.firstName} image={user.image}/>
-      <p>{user.firstName}</p>
-      <p>{id}</p>
-      <p>{message}</p>*/}
       <Container fluid className='m-0 p-0 profile-container vh-100'>
         <Row>
           <Col>
+            <Logo />
             <Header firstName={user.firstName} image={user.image}/>
           </Col>
         </Row>
-        <Row className='body-row'>
-          <ProfileBody />
-        </Row>
+        <ProfileBody />
       </Container>
     </>
   )
