@@ -5,7 +5,6 @@ import './profile.css';
 import Header from '../header/Header.jsx';
 import Logo from '../logo/Logo.jsx';
 import ProfileBody from '../profile-body/Profile-body.jsx';
-import defaultImage from '../../assets/default-profile-image.jpg';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';

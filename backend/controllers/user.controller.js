@@ -12,7 +12,6 @@ export const createUser = async (req, res) => {
   console.log(req.body, 'with non-hashed password');
 
   try {
-    console.log('are we here?');
 
     if (user.email === '' || user.password === '') {
       console.log('Please provide all fields')

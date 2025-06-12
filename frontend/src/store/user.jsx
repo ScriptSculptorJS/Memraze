@@ -49,6 +49,7 @@ export const useUserStore = create((set) => ({
     try {
       
       const res = await axios.get('http://localhost:5000/api/users')
+      console.log(res, 'user res')
     
       if (res.data.valid) {
 

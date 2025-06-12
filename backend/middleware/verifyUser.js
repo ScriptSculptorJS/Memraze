@@ -1,17 +1,17 @@
 import jwt from 'jsonwebtoken';
 
-/*const createAccessToken = (id) => {
+const createAccessToken = (id) => {
   return jwt.sign(
     {id}, 
     process.env.ACCESS_TOKEN_SECRET, 
     //set this to 15 minutes later
     { expiresIn: '15m' });
-};*/
+};
 
 const verifyUser = async (req, res, next) => {
   
   const accessToken = req.cookies.accessToken;
-  
+ 
   if (!accessToken) {
     const refreshToken = req.cookies.refreshToken;
     
