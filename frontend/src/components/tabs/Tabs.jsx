@@ -5,7 +5,7 @@ function Tabs() {
 
   return(
     <Col sm={3} lg={2} className='tab-container vh-100'>
-      <p className='mt-3'>
+      <p className='mt-3 collection'>
         Your collection
       </p>
       <Nav variant="pills" className="flex-column">

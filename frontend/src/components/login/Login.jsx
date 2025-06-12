@@ -1,24 +1,26 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUserStore } from '../../store/user.js';
-import { useAuthContext } from '../../hook/useAuthContext.jsx';
- 
+import { useUserStore } from '../../store/user.jsx';
+import { useInfoStore } from '../../store/info.ts';
+
 function Login() {
   const [newUser, setNewUser] = useState({
     firstName: '',
     email: '',
     password: '',
   });
-  const { user, dispatch } = useAuthContext();
 
   const navigate = useNavigate();
   const { loginUser, createUser } = useUserStore();
+  /*This is to login user and store user data in store for global use const { user, loginStoreInfo } = useUser();*/ 
+  const updateFirstName = useInfoStore(state => state.updateFirstName)
 
   const handleUserLogin = async (e) => {
     e.preventDefault();
 
-    const { success, message, data, login } = await loginUser(newUser, dispatch);
+    const { success, message, data, login } = await loginUser(newUser);
     console.log('login:', login);
+    updateFirstName(data.firstName);
 
     if (!login || (!success && !data)) {
       console.log('Message:', message);
@@ -26,6 +28,7 @@ function Login() {
       console.log('Success:', success);
       console.log('Message:', message);
       console.log('User:', data);
+
 
       setNewUser({
         firstName: '',

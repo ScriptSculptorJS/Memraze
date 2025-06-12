@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useUserStore } from '../../store/user.js';
+import { useUserStore } from '../../store/user.jsx';
 import './profile.css';
 import Header from '../header/Header.jsx';
 import Logo from '../logo/Logo.jsx';

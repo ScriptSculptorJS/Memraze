@@ -1,4 +1,9 @@
+import './header.css';
+import { useInfoStore } from '../../store/info.ts';
+
 function Header({ firstName, image }) {
+
+  const userFirstName = useInfoStore(state => state.firstName)
 
   return(
     <div className='header-container'>
@@ -6,7 +11,7 @@ function Header({ firstName, image }) {
         <img src={image} className='profileImage'/>
       </div>
       <h5>
-        {firstName}
+        {userFirstName}
       </h5>
       <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut. 
