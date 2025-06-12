@@ -34,11 +34,6 @@ function Profile() {
   console.log(id)
   
   console.log(user);
-  if (!user.image) {
-    user.image = defaultImage;
-  };
-
-  //console.log(JSON.parse(localStorage.getItem('user')));
 
   /*const logout = () => {
     navigate...
@@ -51,7 +46,7 @@ function Profile() {
         <Row>
           <Col>
             <Logo />
-            <Header firstName={user.firstName} image={user.image}/>
+            <Header />
           </Col>
         </Row>
         <ProfileBody />

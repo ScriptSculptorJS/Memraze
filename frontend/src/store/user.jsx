@@ -22,7 +22,7 @@ export const useUserStore = create((set) => ({
 
       console.log('What is the error:', err)
 
-      return { message: err.response.data.message, status: err.response.status, data: 'No user data due to error stated in  message' }
+      return { message: err.response.data.message, status: err.response.status }
 
     }
   },
