@@ -5,7 +5,24 @@
   padding: 17px 20px
 }
 
+.newTabForm {
+  border: 1px solid #9999993e;
+  padding: 8px;
+  border-radius: 5px;
+}
+
 .tab-text {
   font-size: 13px;
   color: #444444;
+}
+
+h6 {
+  font-weight: bold;
+  color: #444444;
+  margin-bottom: 15px;
+}
+
+.button {
+  background-color: #2391eb;
+  border: #2391eb
 }
