@@ -13,12 +13,18 @@ function Login() {
 
   const navigate = useNavigate();
   const { loginUser, createUser } = useUserStore();
+
+  let loginCardElement = document.querySelector('.js-login-card');
+
+  let signupCardElement = document.querySelector('.js-signup-card');
   /*This is to login user and store user data in store for global use const { user, loginStoreInfo } = useUser();*/ 
   const updateFirstName = useInfoStore(state => state.updateFirstName)
   const updateProfileImage = useInfoStore(state => state.updateProfileImage)
 
   const handleUserLogin = async (e) => {
-    e.preventDefault();
+    if(e) {
+      e.preventDefault();
+    }
 
     const { success, message, data, login } = await loginUser(newUser);
     console.log('login:', login);
@@ -46,7 +52,9 @@ function Login() {
 
 
   const handleUserSignup = async (e) => {
-    e.preventDefault();
+    if(e) {
+      e.preventDefault();
+    }
     
     const { success, message, data } = await createUser(newUser);
 
@@ -63,11 +71,19 @@ function Login() {
     console.log('User:', data)
   }
 
+  function handleKeyDown(e) {
+    console.log(e.key, 'What is here?')
+    if (e.key === 'Enter' && loginCardElement.classList.contains('hidden')) {
+      handleUserSignup();
+    } else if (e.key === 'Enter' && signupCardElement.classList.contains('hidden')) {
+      handleUserLogin();
+    }
+  }
+
   function Switch() {
+    loginCardElement = document.querySelector('.js-login-card');
 
-    const loginCardElement = document.querySelector('.js-login-card');
-
-    const signupCardElement = document.querySelector('.js-signup-card');
+    signupCardElement = document.querySelector('.js-signup-card');
 
     if (signupCardElement.classList.contains('hidden')) {
 
@@ -100,7 +116,8 @@ function Login() {
             name='email'
             className='email-input'
             value={newUser.email}
-            onChange={e => setNewUser({ ...newUser, email: e.target.value })} 
+            onChange={e => setNewUser({ ...newUser, email: e.target.value })}
+            onKeyDown={handleKeyDown} 
           />
 
           <input
@@ -109,7 +126,8 @@ function Login() {
             name='password'
             className='password-input'
             value={newUser.password}
-            onChange={e => setNewUser({ ...newUser, password: e.target.value})} 
+            onChange={e => setNewUser({ ...newUser, password: e.target.value})}
+            onKeyDown={handleKeyDown} 
           />
 
           <button 
@@ -130,6 +148,7 @@ function Login() {
             className='fname-input'
             value={newUser.firstName}
             onChange={e => setNewUser({ ...newUser, firstName: e.target.value})}
+            onKeyDown={handleKeyDown}
           />
 
           <input
@@ -138,7 +157,8 @@ function Login() {
             name='email'
             className='email-input'
             value={newUser.email}
-            onChange={e => setNewUser({ ...newUser, email: e.target.value })} 
+            onChange={e => setNewUser({ ...newUser, email: e.target.value })}
+            onKeyDown={handleKeyDown} 
           />
 
           <input
@@ -147,7 +167,8 @@ function Login() {
             name='password'
             className='password-input'
             value={newUser.password}
-            onChange={e => setNewUser({ ...newUser, password: e.target.value})} 
+            onChange={e => setNewUser({ ...newUser, password: e.target.value})}
+            onKeyDown={handleKeyDown} 
           />
 
           <button 
