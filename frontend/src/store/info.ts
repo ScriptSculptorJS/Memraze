@@ -6,7 +6,6 @@ interface User {
   updateFirstName: (newFirstName: string) => void
   profileImage: string
   updateProfileImage: (newProfileImage: string) => void
-  reset: () => void
 }
 
 export const useInfoStore = create<User>()(persist((set, get) => ({

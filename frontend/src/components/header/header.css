@@ -33,6 +33,7 @@ p {
   margin-top: 3.5px;  
   margin-bottom: 0px;
   font-size: 13px;
+  color: #444444;
 }
 
 @media (max-width: 640px) {

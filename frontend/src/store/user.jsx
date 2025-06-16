@@ -26,6 +26,23 @@ export const useUserStore = create((set) => ({
 
     }
   },
+  logoutUser: async () => {
+    try {
+      const res = await axios.post('http://localhost:5000/api/auth/logout');
+
+      console.log(res)
+      
+      if (res.statusText === 'OK') {
+        console.log('do we get ok?', res.statusText);
+        return { pass: res.statusText };
+        /*window.location.href = '/';*/
+      } else {
+        return {message: `Issue logging out user', ${res.statusText}`, status: 'Failed'}
+      }
+    } catch(err) {
+      return{ message: err.response.data, status: err.response.status}
+    }
+  },
   createUser: async (newUser) => {
     try {
 

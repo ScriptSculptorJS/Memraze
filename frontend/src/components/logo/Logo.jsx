@@ -1,21 +1,36 @@
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { useNavigate } from 'react-router-dom';
 import './logo.css'
 import { useInfoStore } from '../../store/info.ts'
+import { useUserStore } from '../../store/user.jsx'
 
 function Logo() {
+  const navigate = useNavigate();
+
   const updateFirstName = useInfoStore(state => state.updateFirstName)
 
   const updateProfileImage = useInfoStore(state => state.updateProfileImage)
 
-  function handleUserLogout() {
+  const firstName = useInfoStore(state => state.firstName);
+
+  const { logoutUser } = useUserStore();
+  const { storage } = useInfoStore();
+
+  const handleUserLogout = async () => {
     console.log('I was clicked')
+    const pass = await logoutUser();
+    console.log(pass, 'pass');
+    if (pass.pass === 'OK') {
+      updateFirstName('');
+      updateProfileImage('');
 
-    updateFirstName('');
-    updateProfileImage('');
+      console.log(firstName);
 
-    localStorage.clear();
+      localStorage.clear();
+      window.location.reload();
+    }
+    
+    
+    /*navigate('/');*/
   }
 
 

@@ -96,15 +96,22 @@ export const login = async (req, res) => {
 export const logout = (req, res) => {
   const cookies = req.cookies;
 
-  if (!cookies?.jwt) {
+  if (!cookies?.refreshToken) {
     return res.sendStatus(204);
   };
 
-  res.clearCookie('jwt', {
+  console.log('we made it here without error')
+  res.clearCookie('refreshToken', {
     httpOnly: true,
     sameSite: 'None',
     secure: true,
   });
 
-  res.json({ message: 'Cookie cleared' });
+  res.clearCookie('accessToken', {
+    httpOnly: true,
+    sameSite: 'None',
+    secure: true,
+  });
+
+  res.json({ login: false, message: 'Cookie cleared' });
 };
