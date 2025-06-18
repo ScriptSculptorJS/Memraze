@@ -6,6 +6,8 @@ interface User {
   updateFirstName: (newFirstName: string) => void
   profileImage: string
   updateProfileImage: (newProfileImage: string) => void
+  tabs: []
+  updateTabsArray: (newTabsArray: []) => void
 }
 
 export const useInfoStore = create<User>()(persist((set, get) => ({
@@ -20,6 +22,12 @@ export const useInfoStore = create<User>()(persist((set, get) => ({
     const profileImageState = get().profileImage
 
     set({ profileImage: newProfileImage + profileImageState })
+  },
+  tabs: [],
+  updateTabs: (newTabsArray: []) => {
+    /*const tabsState = get().tabs*/
+
+    set({ tabs: newTabsArray})
   },
   storage: createJSONStorage(() => sessionStorage)
 })))

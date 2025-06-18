@@ -20,6 +20,7 @@ function Login() {
   /*This is to login user and store user data in store for global use const { user, loginStoreInfo } = useUser();*/ 
   const updateFirstName = useInfoStore(state => state.updateFirstName)
   const updateProfileImage = useInfoStore(state => state.updateProfileImage)
+  const updateTabs = useInfoStore(state => state.updateTabs)
 
   const handleUserLogin = async (e) => {
     if(e) {
@@ -30,7 +31,8 @@ function Login() {
     console.log('login:', login);
     localStorage.clear();
     updateFirstName(data.firstName);
-    updateProfileImage(defaultImage);
+    updateProfileImage(defaultImage)
+    updateTabs(data.tabs);
 
     if (!login || (!success && !data)) {
       console.log('Message:', message);

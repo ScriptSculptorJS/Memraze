@@ -4,22 +4,32 @@ import Tab from 'react-bootstrap/Tab';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import './tab-info.css';
+import { useUserStore } from '../../store/user.jsx';
+import { useInfoStore } from '../../store/info.ts';
 
 function TabInfo() {
   const [ newTab, setNewTab ] = useState({
     title: '',
     description: '',
   })
+
+  const updateUser = useUserStore(state => state.updateUser);
+  const updateTabs = useInfoStore(state => state.updateTabs);
+  let tabs;
   
-  function handleNewTab(e) {
+  const handleNewTab = async (e) => {
     e.preventDefault();
     console.log(newTab)
+    const res = await updateUser(newTab);
+    console.log(res.data.data.tabs, 'do we see that tabs array with the updated info here?');
+    const newTabsArray = res.data.data.tabs;
+    updateTabs(newTabsArray);
   }
 
   return(
     <Col sm={9} lg={10} className='tab-info-container'>
       <Tab.Content>
-        <Tab.Pane eventKey="first" className='tab-text'>
+        <Tab.Pane eventKey="0" className='tab-text'>
           <h6>
             Let's get you started with your new Tab!
           </h6>
@@ -54,13 +64,13 @@ function TabInfo() {
           </Form>
         </Tab.Pane>
         <Tab.Pane 
-          eventKey="second" 
+          eventKey="1" 
           className='tab-text'
         >
           First tab content
         </Tab.Pane>
         <Tab.Pane 
-          eventKey="third" 
+          eventKey="2" 
           className='tab-text'
         >
           Second tab content

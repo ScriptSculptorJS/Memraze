@@ -1,5 +1,10 @@
 import mongoose from 'mongoose';
 
+const tabSchema = new mongoose.Schema({
+  title: String,
+  description: String,
+})
+
 const userSchema = new mongoose.Schema({
   firstName: {
     type: String,
@@ -14,6 +19,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  tabs: [tabSchema],
 }, {
   timestamps: true // createdAt, updatedAt
 });

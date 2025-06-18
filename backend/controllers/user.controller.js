@@ -2,6 +2,7 @@ import User from '../models/users.model.js';
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import validator from 'validator';
+import jwt from 'jsonwebtoken';
 
 export const getAccess = async (req, res) => {
   return res.json({ valid: true, message: 'Authorized'});
@@ -68,16 +69,27 @@ export const createUser = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
-  const { id } = req.params;
+  console.log(req.body, `What is showing up here when I send in the newTab's information to the backend`)
+  const tabInfo = req.body;
+  const access = req.cookies.accessToken;
 
-  const user = req.body;
+  const decoded = jwt.decode(access);
+  console.log(decoded.id, 'Is this the id now that was came from decoding the token?');
+  const id = decoded.id;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ success: false, message: 'User not found'});
   }
 
   try {
-    const updatedUser = await User.findByIdAndUpdate(id, user, { new: true });
+    const updatedUser = await User.findByIdAndUpdate(id, {
+      $push: {
+        tabs: {
+          $each: [tabInfo],
+          $position: 0
+        }
+      }
+    }, { new: true });
     res.status(200).json({ success: true, data: updatedUser });
 
   } catch (error) {

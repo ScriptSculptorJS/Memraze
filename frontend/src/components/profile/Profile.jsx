@@ -10,7 +10,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 function Profile() {
-  const [message, setMessage] = useState();
   const navigate = useNavigate();
   const { checkAccess } = useUserStore();
 
@@ -25,8 +24,7 @@ function Profile() {
     }
     checkingTokenAccess();
   })
-  //const signOut = useSignOut();
-  //const navigate = useNavigate();
+  
   const location = useLocation();
   const id = location.state.id;
   const user = location.state.data;
@@ -34,23 +32,16 @@ function Profile() {
   
   console.log(user);
 
-  /*const logout = () => {
-    navigate...
-  }*/
-
-  // When have a logout button use logout function
   return(
-    <>
-      <Container fluid className='m-0 p-0 profile-container vh-100'>
-        <Row>
-          <Col>
-            <Logo />
-            <Header />
-          </Col>
-        </Row>
-        <ProfileBody />
-      </Container>
-    </>
+    <Container fluid className='m-0 p-0 profile-container'>
+      <Row>
+        <Col>
+          <Logo />
+          <Header />
+        </Col>
+      </Row>
+      <ProfileBody />
+    </Container>
   )
 };
 
