@@ -28,7 +28,7 @@ function Login() {
     }
 
     const { success, message, data, login } = await loginUser(newUser);
-    console.log('login:', login);
+    
     localStorage.clear();
     updateFirstName(data.firstName);
     updateProfileImage(defaultImage)

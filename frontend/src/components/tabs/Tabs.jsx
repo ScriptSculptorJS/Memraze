@@ -9,8 +9,8 @@ function Tabs() {
   
   for (let i = 0; i < tabs.length; i++) {
     newTabsArray.push(
-        <Nav.Item>
-          <Nav.Link key={tabs[i].title} eventKey={i + 1} className='tab-title'>{tabs[i].title}</Nav.Link>
+        <Nav.Item key={i + 1}>
+          <Nav.Link  eventKey={i + 1} className='tab-title'>{tabs[i].title}</Nav.Link>
         </Nav.Item>
     )
   };

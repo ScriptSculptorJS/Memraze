@@ -22,7 +22,7 @@ function TabInfo() {
   for (let i = 0; i < tabs.length; i++) {
     newDescriptionArray.push(
         <Tab.Pane 
-          key={tabs[i].title}
+          key={i + 1}
           eventKey={i + 1} 
           className='tab-text'
         >
@@ -38,7 +38,7 @@ function TabInfo() {
     
     const newTabsArray = res.data.data.tabs;
     updateTabs(newTabsArray);
-    
+
     window.location.reload();
   }
 

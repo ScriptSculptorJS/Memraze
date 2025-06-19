@@ -15,9 +15,8 @@ function Profile() {
 
   useEffect(() => {
     async function checkingTokenAccess() {
-      console.log('is this triggering upon refreshing page?');
       const res = await checkAccess();
-      console.log(res);
+      
       if (!res.valid) {
         navigate('/')
       }
@@ -25,12 +24,12 @@ function Profile() {
     checkingTokenAccess();
   })
   
-  const location = useLocation();
+  /*const location = useLocation();
   const id = location.state.id;
   const user = location.state.data;
   console.log(id)
   
-  console.log(user);
+  console.log(user);*/
 
   return(
     <Container fluid className='m-0 p-0 profile-container'>
