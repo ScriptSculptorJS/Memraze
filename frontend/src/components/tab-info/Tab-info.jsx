@@ -73,7 +73,7 @@ function TabInfo() {
             <Button 
               size='sm' 
               className='button' 
-              onClick={handleNewTab}
+              onClick={() => handleNewTab()}
             >
               Create
             </Button>
