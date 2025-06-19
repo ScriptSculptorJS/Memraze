@@ -82,16 +82,18 @@ export const updateUser = async (req, res) => {
   }
 
   try {
-    const updatedUser = await User.findByIdAndUpdate(id, {
-      $push: {
-        tabs: {
-          $each: [tabInfo],
-          $position: 0
+    if (tabInfo.title && tabInfo.description) {
+      const updatedTab = await User.findByIdAndUpdate(id, {
+        $push: {
+          tabs: {
+            $each: [tabInfo],
+            $position: 0
+          }
         }
-      }
-    }, { new: true });
-    res.status(200).json({ success: true, data: updatedUser });
-
+      }, { new: true });
+      res.status(200).json({ success: true, data: updatedTab });
+    }
+    
   } catch (error) {
     res.status(500).json({ success: false, message: 'Server error'});
   }

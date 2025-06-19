@@ -4,6 +4,7 @@ import { persist, createJSONStorage } from 'zustand/middleware'
 interface User {
   firstName: string
   updateFirstName: (newFirstName: string) => void
+  description: string
   profileImage: string
   updateProfileImage: (newProfileImage: string) => void
   tabs: []
@@ -17,6 +18,7 @@ export const useInfoStore = create<User>()(persist((set, get) => ({
     
     set({ firstName: newFirstName + firstNameState })
   },
+  description: '',
   profileImage: '',
   updateProfileImage: (newProfileImage: string) => {
     const profileImageState = get().profileImage

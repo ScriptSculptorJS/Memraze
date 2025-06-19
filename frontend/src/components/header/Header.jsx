@@ -1,5 +1,6 @@
 import './header.css';
 import { useInfoStore } from '../../store/info.ts';
+import DescriptionModal from '../descriptionModal/DescriptionModal.jsx';
 
 function Header({ firstName, image }) {
 
@@ -14,9 +15,7 @@ function Header({ firstName, image }) {
       <h5>
         {userFirstName}
       </h5>
-      <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut. 
-      </p>
+      <DescriptionModal />
     </div>
   )
 }
