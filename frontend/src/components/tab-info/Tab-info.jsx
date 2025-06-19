@@ -15,15 +15,31 @@ function TabInfo() {
 
   const updateUser = useUserStore(state => state.updateUser);
   const updateTabs = useInfoStore(state => state.updateTabs);
-  let tabs;
+  const tabs = useInfoStore(state => state.tabs);
+
+  let newDescriptionArray = [];
+
+  for (let i = 0; i < tabs.length; i++) {
+    newDescriptionArray.push(
+        <Tab.Pane 
+          key={tabs[i].title}
+          eventKey={i + 1} 
+          className='tab-text'
+        >
+          {tabs[i].description}
+        </Tab.Pane>
+    )
+  }
   
   const handleNewTab = async (e) => {
     e.preventDefault();
-    console.log(newTab)
+    
     const res = await updateUser(newTab);
-    console.log(res.data.data.tabs, 'do we see that tabs array with the updated info here?');
+    
     const newTabsArray = res.data.data.tabs;
     updateTabs(newTabsArray);
+    
+    window.location.reload();
   }
 
   return(
@@ -63,18 +79,7 @@ function TabInfo() {
             </Button>
           </Form>
         </Tab.Pane>
-        <Tab.Pane 
-          eventKey="1" 
-          className='tab-text'
-        >
-          First tab content
-        </Tab.Pane>
-        <Tab.Pane 
-          eventKey="2" 
-          className='tab-text'
-        >
-          Second tab content
-        </Tab.Pane>
+        {newDescriptionArray}
       </Tab.Content>
     </Col>
   )
