@@ -25,11 +25,19 @@ export const login = async (req, res) => {
 
   try {
     if (!email || !password) {
-      console.log('All fields are required')
+      console.log('Field is missing')
+      res.json({
+        status: 'Field is missing',
+        message: 'All fields must be entered'
+      })
     };
 
     if (!validator.isEmail(email)) {
-      console.log('Email is not valid');
+      console.log('Email is not valid')
+      res.json({
+        status: 'Email is not valid',
+        message: 'Email or password is incorrect'
+      });
     };
 
     const foundUser = await User.findOne({ email: email });
@@ -37,8 +45,8 @@ export const login = async (req, res) => {
     if (!foundUser) {
       console.log('User not found');
       res.status(404).json({
-        status: '404 Not Found',
-        message: 'User not found',
+        status: 'User not found in database',
+        message: 'Email or password is incorrect',
       });
       return;
     };
@@ -51,8 +59,8 @@ export const login = async (req, res) => {
     if (!validPassword) {
       console.log('Password is incorrect');
       res.status(401).json({
-        status: '401',
-        message: 'Password is incorrect'
+        status: 'Password is incorrect',
+        message: 'Email or password is incorrect'
       });
       return;
     };
