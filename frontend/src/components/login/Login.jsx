@@ -21,6 +21,7 @@ function Login() {
   const updateFirstName = useInfoStore(state => state.updateFirstName)
   const updateProfileImage = useInfoStore(state => state.updateProfileImage)
   const updateTabs = useInfoStore(state => state.updateTabs)
+  const updateUserDescription = useInfoStore(state => state.updateUserDescription);
 
   const handleUserLogin = async (e) => {
     if(e) {
@@ -33,6 +34,9 @@ function Login() {
     updateFirstName(data.firstName);
     updateProfileImage(defaultImage)
     updateTabs(data.tabs);
+    if (data.description) {
+      updateUserDescription(data.description);
+    }
 
     if (!login || (!success && !data)) {
       console.log('Message:', message);

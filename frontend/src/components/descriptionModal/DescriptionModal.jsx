@@ -3,14 +3,17 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { useInfoStore } from '../../store/info.ts';
+import { useUserStore } from '../../store/user.jsx';
 
 function DescriptionModal() {
   const [ show, setShow ] = useState(false);
   const [ newDescription, setNewDescription ] = useState('');
   let activeCard = [];
+  const type = 'description';
 
   const description = useInfoStore(state => state.userDescription);
   const updateUserDescription = useInfoStore(state => state.updateUserDescription);
+  const updateUser = useUserStore(state => state.updateUser);
 
 
   if (description === '') {
@@ -58,9 +61,11 @@ function DescriptionModal() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const handleSave = () => {
+  const handleSave = async () => {
     console.log(newDescription);
     updateUserDescription(newDescription);
+    const res = await updateUser(newDescription, type);
+    console.log(res, `what comes back when updating the user's description in the database?`)
   };
 
   return (

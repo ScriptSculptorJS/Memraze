@@ -12,6 +12,7 @@ function TabInfo() {
     title: '',
     description: '',
   })
+  const requestType = 'tab';
 
   const updateUser = useUserStore(state => state.updateUser);
   const updateTabs = useInfoStore(state => state.updateTabs);
@@ -31,10 +32,8 @@ function TabInfo() {
     )
   }
   
-  const handleNewTab = async (e) => {
-    e.preventDefault();
-    
-    const res = await updateUser(newTab);
+  const handleNewTab = async () => {
+    const res = await updateUser(newTab, requestType);
     
     const newTabsArray = res.data.data.tabs;
     updateTabs(newTabsArray);

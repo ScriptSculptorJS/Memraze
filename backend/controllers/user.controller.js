@@ -70,8 +70,10 @@ export const createUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   console.log(req.body, `What is showing up here when I send in the newTab's information to the backend`)
-  const tabInfo = req.body;
+  const newInfo = req.body;
   const access = req.cookies.accessToken;
+  let updatedInfo;
+  console.log(newInfo);
 
   const decoded = jwt.decode(access);
   console.log(decoded.id, 'Is this the id now that was came from decoding the token?');
@@ -82,16 +84,21 @@ export const updateUser = async (req, res) => {
   }
 
   try {
-    if (tabInfo.title && tabInfo.description) {
-      const updatedTab = await User.findByIdAndUpdate(id, {
+    if (newInfo.requestType === 'description') {
+      console.log('we are in the if else statement to determine whether it is a description or tab')
+      updatedInfo = await User.findByIdAndUpdate(id, {
+        description: newInfo.newObject
+      })
+    } else if (newInfo.requestType === 'tab') {
+      updatedInfo = await User.findByIdAndUpdate(id, {
         $push: {
           tabs: {
-            $each: [tabInfo],
+            $each: [newInfo.newObject],
             $position: 0
           }
         }
       }, { new: true });
-      res.status(200).json({ success: true, data: updatedTab });
+      res.status(200).json({ success: true, data: updatedInfo });
     }
     
   } catch (error) {
