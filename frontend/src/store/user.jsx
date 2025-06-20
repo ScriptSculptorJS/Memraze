@@ -22,7 +22,7 @@ export const useUserStore = create((set) => ({
 
       console.log('What is the error:', err)
 
-      return { message: err.response.data.message, status: err.response.status }
+      return { success: err.response.data.success, message: err.response.data.message, status: err.response.status, statusMessage: err.response.data.status }
 
     }
   },

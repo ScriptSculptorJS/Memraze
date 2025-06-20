@@ -22,33 +22,38 @@ const createRefreshToken = (id) => {
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
+  console.log(email, 'what do you see for email?')
+  console.log(password, 'What do you see for password?')
 
   try {
-    if (!email || !password) {
-      console.log('Field is missing')
-      res.json({
-        status: 'Field is missing',
-        message: 'All fields must be entered'
-      })
-    };
+    let errorMessage = '';
 
-    if (!validator.isEmail(email)) {
+    if (!email) {
+
+      console.log('Field is missing.')
+      errorMessage += 'email missing.'
+      
+    } else if (!validator.isEmail(email)) {
+
       console.log('Email is not valid')
-      res.json({
-        status: 'Email is not valid',
-        message: 'Email or password is incorrect'
-      });
-    };
+      errorMessage += 'email not being valid.'
+
+    };;
 
     const foundUser = await User.findOne({ email: email });
 
     if (!foundUser) {
+
       console.log('User not found');
+
       res.status(404).json({
-        status: 'User not found in database',
+        success: false,
+        status: `User not found in database due to: ${errorMessage}`,
         message: 'Email or password is incorrect',
       });
+
       return;
+
     };
 
     const validPassword = await bcrypt.compare(
@@ -56,16 +61,34 @@ export const login = async (req, res) => {
       foundUser.password
     );
 
-    if (!validPassword) {
-      console.log('Password is incorrect');
+    if (!password) {
+
+      console.log('Password is missing');
+
       res.status(401).json({
+        success: false,
+        status: 'Password is missing',
+        message: 'Email or password is incorrect'
+      });
+
+      return;
+
+    } else if(!validPassword) {
+
+      console.log('Password is missing or incorrect');
+
+      res.status(401).json({
+        success: false,
         status: 'Password is incorrect',
         message: 'Email or password is incorrect'
       });
+
       return;
+
     };
 
     console.log('In login', foundUser._id);
+
     const accessToken = createAccessToken(foundUser._id);
 
     const refreshToken = createRefreshToken(foundUser._id);
@@ -90,18 +113,23 @@ export const login = async (req, res) => {
       success: true, 
       data: foundUser, 
     });
+
   } catch (err) {
+
     console.error('Internal Server Error:', err.message);
+
     res.status(500).json({ 
       login: false,
       success: false, 
       status: '500 Internal Server Error',
       message: '500 Internal Server Error: User not logged in'
     })
+
   }
 };
 
 export const logout = (req, res) => {
+
   const cookies = req.cookies;
 
   if (!cookies?.refreshToken) {
@@ -109,6 +137,7 @@ export const logout = (req, res) => {
   };
 
   console.log('we made it here without error')
+  
   res.clearCookie('refreshToken', {
     httpOnly: true,
     sameSite: 'None',

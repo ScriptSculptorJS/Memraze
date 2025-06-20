@@ -28,19 +28,21 @@ function Login() {
       e.preventDefault();
     }
 
-    const { success, message, data, login } = await loginUser(newUser);
+    const { success, message, data, login, status, statusMessage } = await loginUser(newUser);
     
     localStorage.clear();
-    updateFirstName(data.firstName);
-    updateProfileImage(defaultImage)
-    updateTabs(data.tabs);
-    if (data.description) {
-      updateUserDescription(data.description);
-    }
+    
 
-    if (!login || (!success && !data)) {
-      console.log('Message:', message);
+    if (!success) {
+      console.log(`${status} Error: ${statusMessage}`);
+      alert(`Status: ${status}. Error: ${message}`)
     } else {
+      updateFirstName(data.firstName);
+      updateProfileImage(defaultImage)
+      updateTabs(data.tabs);
+      if (data.description) {
+        updateUserDescription(data.description);
+      }
       console.log('Success:', success);
       console.log('Message:', message);
       console.log('User:', data);
