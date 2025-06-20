@@ -164,7 +164,7 @@ function Login() {
             className='email-input'
             value={newUser.email}
             onChange={e => setNewUser({ ...newUser, email: e.target.value })}
-            onKeyDown={handleKeyDown} 
+            onKeyDown={handleKeyDown}
           />
 
           <input
@@ -174,7 +174,7 @@ function Login() {
             className='password-input'
             value={newUser.password}
             onChange={e => setNewUser({ ...newUser, password: e.target.value})}
-            onKeyDown={handleKeyDown} 
+            onKeyDown={handleKeyDown}
           />
 
           <button 

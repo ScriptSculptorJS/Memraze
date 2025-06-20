@@ -1,9 +1,10 @@
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';import './tabs.css';
 import { useInfoStore } from '../../store/info.ts';
+import { shallow } from 'zustand/shallow';
 
 function Tabs() {
-  const tabs = useInfoStore(state => state.tabs);
+  const tabs = useInfoStore(state => state.tabs, shallow);
   
   let newTabsArray = [];
   

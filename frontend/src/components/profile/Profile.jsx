@@ -11,7 +11,7 @@ import Col from 'react-bootstrap/Col';
 
 function Profile() {
   const navigate = useNavigate();
-  const { checkAccess } = useUserStore();
+  const checkAccess = useUserStore(state => state.checkAccess);
 
   useEffect(() => {
     async function checkingTokenAccess() {

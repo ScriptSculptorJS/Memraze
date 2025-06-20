@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import './tab-info.css';
 import { useUserStore } from '../../store/user.jsx';
 import { useInfoStore } from '../../store/info.ts';
+import { shallow } from 'zustand/shallow';
 
 function TabInfo() {
   const [ newTab, setNewTab ] = useState({
@@ -16,7 +17,7 @@ function TabInfo() {
 
   const updateUser = useUserStore(state => state.updateUser);
   const updateTabs = useInfoStore(state => state.updateTabs);
-  const tabs = useInfoStore(state => state.tabs);
+  const tabs = useInfoStore(state => state.tabs, shallow);
 
   let newDescriptionArray = [];
 

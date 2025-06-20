@@ -17,7 +17,7 @@ export const useInfoStore = create<User>()(persist((set, get) => ({
   updateFirstName: (newFirstName: string) => {
     const firstNameState = get().firstName
     
-    set({ firstName: newFirstName + firstNameState })
+    set({ firstName: newFirstName })
   },
   userDescription: '',
   updateUserDescription: (newUserDescription: string) => {
@@ -27,7 +27,7 @@ export const useInfoStore = create<User>()(persist((set, get) => ({
   updateProfileImage: (newProfileImage: string) => {
     const profileImageState = get().profileImage
 
-    set({ profileImage: newProfileImage + profileImageState })
+    set({ profileImage: newProfileImage })
   },
   tabs: [],
   updateTabs: (newTabsArray: []) => {

@@ -2,7 +2,7 @@ import './header.css';
 import { useInfoStore } from '../../store/info.ts';
 import DescriptionModal from '../descriptionModal/DescriptionModal.jsx';
 
-function Header({ firstName, image }) {
+function Header() {
 
   const userFirstName = useInfoStore(state => state.firstName)
   const userProfileImage = useInfoStore(state => state.profileImage)
