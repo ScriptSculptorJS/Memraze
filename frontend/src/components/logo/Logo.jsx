@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import './logo.css'
-import { useInfoStore } from '../../store/info.ts'
 import { useUserStore } from '../../store/user.jsx'
 
 function Logo() {

@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { useInfoStore } from '../../store/info.ts';
 import { useUserStore } from '../../store/user.jsx';
+import './descriptionModal.css';
 
 function DescriptionModal() {
   const [ show, setShow ] = useState(false);
@@ -52,8 +53,10 @@ function DescriptionModal() {
     )
   } else if (description !== '') {
     activeCard = [].concat(
-      <div key='2' className='js-user-description-card'>
-        {description}
+      <div key='2' className='js-user-description-card' 
+      style={{color: '#444444'}}>
+        {description}&nbsp; <span id='delete-description' 
+        onClick={() => handleDeleteDescription()}>x</span>
       </div>
     )
   }
@@ -61,12 +64,19 @@ function DescriptionModal() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   const handleSave = async () => {
     console.log(newDescription);
     updateUserDescription(newDescription);
     const res = await updateUser(newDescription, type);
     console.log(res, `what comes back when updating the user's description in the database?`)
   };
+
+  const handleDeleteDescription = async (e) => {
+    updateUserDescription('');
+    const res = await updateUser('', type);
+    console.log(res, 'Description was removed. Did the button show up?')
+  }
 
   return (
     <>
