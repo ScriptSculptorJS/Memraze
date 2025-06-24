@@ -7,16 +7,20 @@ import { useUserStore } from '../../store/user.jsx';
 import './descriptionModal.css';
 
 function DescriptionModal() {
+  //Create states for whether to show modal or not and keep description live
   const [ show, setShow ] = useState(false);
   const [ newDescription, setNewDescription ] = useState('');
+
+  //Create empty array to start off the activeCard that will later be updated based on user interaction and what the user currently has as their description
   let activeCard = [];
   const type = 'description';
 
+  //Access properties and methods from Info and User Stores
   const description = useInfoStore(state => state.userDescription);
   const updateUserDescription = useInfoStore(state => state.updateUserDescription);
   const updateUser = useUserStore(state => state.updateUser);
 
-
+  //Checks if user has an empty string or not for their description. If empty, button to create a description becomes visible. If they have a description, their description is shown with an x after it
   if (description === '') {
     activeCard = [].concat(
       <div key='1'  className='js-description-modal-card'>
@@ -61,21 +65,21 @@ function DescriptionModal() {
     )
   }
   
-
+  //Functions to close or show the description modal
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  //Updates description in Info Store and updates the user's description in the db
   const handleSave = async () => {
     console.log(newDescription);
     updateUserDescription(newDescription);
-    const res = await updateUser(newDescription, type);
-    console.log(res, `what comes back when updating the user's description in the database?`)
+    updateUser(newDescription, type);
   };
 
+  //Updates description in Info Store and updates the user's description in the db. Then, shows the modal to enter a new one
   const handleDeleteDescription = async () => {
     updateUserDescription('');
-    const res = await updateUser('', type);
-    console.log(res, 'Description was removed. Did the button show up?')
+    updateUser('', type);
     handleShow();
   }
 

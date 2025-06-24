@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useUserStore } from '../../store/user.jsx';
 import './profile.css';
@@ -10,9 +10,11 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 function Profile() {
+  //Access two methods for later use
   const navigate = useNavigate();
   const checkAccess = useUserStore(state => state.checkAccess);
 
+  //Checks that the user has access token once the page has rendered, and if they do not sends them to login page
   useEffect(() => {
     async function checkingTokenAccess() {
       const res = await checkAccess();
@@ -23,13 +25,6 @@ function Profile() {
     }
     checkingTokenAccess();
   })
-  
-  /*const location = useLocation();
-  const id = location.state.id;
-  const user = location.state.data;
-  console.log(id)
-  
-  console.log(user);*/
 
   return(
     <Container fluid className='m-0 p-0 profile-container'>

@@ -1,16 +1,14 @@
-import { useNavigate } from 'react-router-dom';
 import './logo.css'
 import { useUserStore } from '../../store/user.jsx'
 
 function Logo() {
-  const navigate = useNavigate();
-
+  //Accessing method from User Store
   const logoutUser = useUserStore(state => state.logoutUser);
 
+  //Runs the logoutUser method, and if it was successful we clear local storage and reload page
   const handleUserLogout = async () => {
-    console.log('I was clicked')
     const pass = await logoutUser();
-    console.log(pass, 'pass');
+    
     if (pass.pass === 'OK') {
 
       localStorage.clear();

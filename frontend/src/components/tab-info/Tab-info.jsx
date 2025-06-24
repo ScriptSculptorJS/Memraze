@@ -9,18 +9,22 @@ import { useInfoStore } from '../../store/info.ts';
 import { shallow } from 'zustand/shallow';
 
 function TabInfo() {
+  //Create state for live new tab information and declare and set value top the request type
   const [ newTab, setNewTab ] = useState({
     title: '',
     description: '',
   })
   const requestType = 'tab';
 
+  //Accessing methods and a property from Info and User stores
   const updateUser = useUserStore(state => state.updateUser);
   const updateTabs = useInfoStore(state => state.updateTabs);
   const tabs = useInfoStore(state => state.tabs, shallow);
 
+  //Declare and set value as an empty array
   let newDescriptionArray = [];
 
+  //Goes through the tabs array and renders html for each tab's description pane
   for (let i = 0; i < tabs.length; i++) {
     newDescriptionArray.push(
         <Tab.Pane 
@@ -33,6 +37,7 @@ function TabInfo() {
     )
   }
   
+  //Updates user's new tab in the db, updates the tabs array in the Info store, and reloads the page
   const handleNewTab = async () => {
     const res = await updateUser(newTab, requestType);
     

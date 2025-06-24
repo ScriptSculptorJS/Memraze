@@ -5,6 +5,7 @@ import { useInfoStore } from '../../store/info.ts';
 import defaultImage from '../../assets/default-profile-image.jpg';
 
 function Login() {
+  //Keep a live record of the user's information their enter into the fields for signing up
   const [newUser, setNewUser] = useState({
     firstName: '',
     email: '',
@@ -12,23 +13,26 @@ function Login() {
   });
 
   const navigate = useNavigate();
+  // Accessing two methods from the User Store for use
   const { loginUser, createUser } = useUserStore();
 
+  //Accessing two elements in the HTML
   let loginCardElement = document.querySelector('.js-login-card');
-
   let signupCardElement = document.querySelector('.js-signup-card');
-  /*This is to login user and store user data in store for global use const { user, loginStoreInfo } = useUser();*/ 
+
+  //Accessing methods from the Info Store for use
   const updateFirstName = useInfoStore(state => state.updateFirstName)
   const updateProfileImage = useInfoStore(state => state.updateProfileImage)
   const updateTabs = useInfoStore(state => state.updateTabs)
   const updateUserDescription = useInfoStore(state => state.updateUserDescription);
 
+  //Checks if logging in user was successful or not. If it was, then we update the Info Store properties, refresh the newUser state, and navigate the user to their profile
   const handleUserLogin = async (e) => {
     if(e) {
       e.preventDefault();
     }
 
-    const { success, message, data, login, status, statusMessage } = await loginUser(newUser);
+    const { success, message, data, status, statusMessage } = await loginUser(newUser);
     
     localStorage.clear();
     
@@ -58,7 +62,7 @@ function Login() {
     }
   };
 
-
+  //Checks if signing up new user was successful. If it was then refresh the newUser state and switch to the login card so user can login
   const handleUserSignup = async (e) => {
     if(e) {
       e.preventDefault();
@@ -66,19 +70,25 @@ function Login() {
     
     const { success, message, data } = await createUser(newUser);
 
-    setNewUser({
-      firstName: '',
-      email: '',
-      password: '',
-    });
+    if (!success) {
+      console.log(`${status} Error: ${statusMessage}`);
+      alert(`Status: ${status}. Error: ${message}`)
+    } else {
+      setNewUser({
+        firstName: '',
+        email: '',
+        password: '',
+      });
 
-    Switch();
+      Switch();
 
-    console.log('Success:', success);
-    console.log('Message:', message);
-    console.log('User:', data)
+      console.log('Success:', success);
+      console.log('Message:', message);
+      console.log('User:', data)
+    }
   }
 
+  //Checks if user clicked the Enter button and determines whether it was when they were on the login or signup card then calls the appropriate function to either sign them up or log them in
   function handleKeyDown(e) {
     console.log(e.key, 'What is here?')
     if (e.key === 'Enter' && loginCardElement.classList.contains('hidden')) {
@@ -88,6 +98,7 @@ function Login() {
     }
   }
 
+  //Switches from signup to login card or vice versa
   function Switch() {
     loginCardElement = document.querySelector('.js-login-card');
 

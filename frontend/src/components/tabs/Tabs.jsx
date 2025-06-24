@@ -6,14 +6,16 @@ import { shallow } from 'zustand/shallow';
 import './tabs.css';
 
 function Tabs() {
+  //Accessing properties and methods from Info and User Stores and declaring type and giving it a value
   const tabs = useInfoStore(state => state.tabs, shallow);
   const updateTabs = useInfoStore(state => state.updateTabs);
   const updateUser = useUserStore(state => state.updateUser);
   const type = 'delete tab';
   
+  //Declaring and giving the value of an empty array for later use
   let newTabsArray = [];
   
-  //Why are the long titles not getting ellipsis based on the css I provided in css file?
+  //Takes the tabs that the user has and renders a new tab for each one
   for (let i = 0; i < tabs.length; i++) {
     newTabsArray.push(
         <Nav.Item key={i + 1}>
@@ -22,10 +24,8 @@ function Tabs() {
     )
   };
 
+  //Deletes the selected tab from the db, and updates the tabs value in the Info Store with the new tabs array. Then, reloads the page to show tab was removed
   const handleDeleteTab = async (title) => {
-
-    console.log(title, 'Just before making the axios request within the tabs component');
-
     const res = await updateUser(title, type);
     console.log(res, 'what are we getting within the tabs component as the response?')
     
