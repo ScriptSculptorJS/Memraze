@@ -98,12 +98,47 @@ export const updateUser = async (req, res) => {
           }
         }
       }, { new: true });
-      res.status(200).json({ success: true, data: updatedInfo });
+    } else if (newInfo.requestType === 'delete tab') {
+      console.log('We are in the backend before updating the deletion of the tab', newInfo.newObject);
+      updatedInfo = await User.findByIdAndUpdate(id, {
+        $pull: {
+          tabs: {
+            title: newInfo.newObject
+          }
+        }
+      }, { new: true })
     }
-    
+    res.status(200).json({ success: true, data: updatedInfo });
+
   } catch (error) {
     res.status(500).json({ success: false, message: 'Server error'});
   }
+}
+
+export const deleteTab = async (req, res) => {
+  const oldTitle = req.body;
+  const access = req.cookies.accessToken;
+
+  const decoded = jwt.decode(access);
+  const id = decoded.id;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ success: false, message: 'User not found'});
+  }
+
+  /*try {
+    const updatedInfo = await User.findByIdAndUpdate(id, {
+      $pull: {
+        tabs: {
+          title: oldTitle
+        }
+      }
+    })
+    res.status(200).json({ success: true, data: updatedInfo });
+  } catch(err) {
+    res.status(500).json({ success: false, message: 'Server error'});
+  }*/
+
 }
 
 export const deleteUser = async (req, res) => {

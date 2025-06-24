@@ -10,16 +10,63 @@
 }
 
 .tab-title {
-  font-size: 13px;
+  font-size: 12px;
+}
+
+.tab-title {
+  padding: 5px 5px 5px 8px;
+}
+
+.title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 85px;
+  padding: 0px;
 }
 
 .nav-link.active {
   background-color: #2a9d8f !important;
   color: white !important;
+  max-width: 25ch !important;
+}
+
+.nav-link.active .delete-tab {
+  color: white;
+  background-color: #2a9d8f;
+  width: 20px;
+  text-align: center;
+  border-radius: 10px;
+}
+.nav-link.active .delete-tab:hover {
+  color: #2a9d8f;
+  background-color: white;
+  width: 20px;
+  text-align: center;
+  border-radius: 10px;
 }
 
 .nav-link {
   background-color: white !important;
   color: #2a9d8f !important;
   border: .5px solid #2a9d8f !important;
+  display: flex;
+  flex-direction: row;
+}
+
+.delete-tab {
+  margin-left: auto;
+  color: #2a9d8f;
+  background-color: white;
+  width: 20px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.delete-tab:hover {
+  color: white;
+  background-color: #2a9d8f;
+  width: 20px;
+  text-align: center;
+  border-radius: 10px;
 }
