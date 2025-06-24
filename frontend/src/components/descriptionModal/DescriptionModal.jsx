@@ -72,10 +72,11 @@ function DescriptionModal() {
     console.log(res, `what comes back when updating the user's description in the database?`)
   };
 
-  const handleDeleteDescription = async (e) => {
+  const handleDeleteDescription = async () => {
     updateUserDescription('');
     const res = await updateUser('', type);
     console.log(res, 'Description was removed. Did the button show up?')
+    handleShow();
   }
 
   return (
