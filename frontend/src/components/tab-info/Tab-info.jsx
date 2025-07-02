@@ -81,7 +81,11 @@ function TabInfo() {
           eventKey={i + 1} 
           className='tab-text'
         >
-          <h6>{tabs[i].description}</h6>
+          <div className='tab-info-header-container'>
+            <h6>"{tabs[i].title}"</h6>
+            <p className='tab-description'>{tabs[i].description}</p>
+          </div>
+          <hr/>
           <NewPost tabNumber={i} />
           <Post posts={tabs[i].posts} />
         </Tab.Pane>

@@ -16,3 +16,15 @@
   box-shadow: none;
   background-color: #2391EB;
 }
+
+.button {
+  background-color: white !important;
+  color: #444444 !important;
+  border: 1px solid #44444435 !important;
+  padding: 3px 10px;
+  font-size: 13px;
+}
+
+.button:hover {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}

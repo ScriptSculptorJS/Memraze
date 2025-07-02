@@ -4,9 +4,11 @@
 }
 
 .card-header {
-  background-color: hsla(12, 76%, 61%, 0.236);
+  /*background-color: hsla(12, 76%, 61%, 0.236);*/
+  background-color: #2a9d9016;
 }
 
 .card-title {
   font-size: 16px;
+  font-weight: bold;
 }

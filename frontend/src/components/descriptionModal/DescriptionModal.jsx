@@ -25,7 +25,7 @@ function DescriptionModal() {
     activeCard = [].concat(
       <div key='1'  className='js-description-modal-card'>
         <Button variant="primary" className='button' onClick={() => handleShow()}>
-          Add your personal description
+          Add your personal description &nbsp; +
         </Button>
 
         <Modal show={show} onHide={() => handleClose()}>

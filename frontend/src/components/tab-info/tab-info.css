@@ -1,6 +1,7 @@
 .tab-info-container {
   border-left: 8px solid #2a9d8f;
   background-color: white !important;
+  /*background-color: #f6f6f7 !important;*/
   padding: 17px 20px
 }
 
@@ -11,17 +12,33 @@
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
+.tab-info-header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h6 {
+  color: #E76f51;
+  font-weight: bold;
+  font-size: 20px;
+}
+
 .tab-text {
   font-size: 13px;
   color: #444444;
 }
 
-h6 {
-  font-weight: 600;
+.tab-description {
   color: #444444;
   margin-bottom: 20px;
   text-align: center;
-  font-size: 18px;
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+
+hr {
+  margin: 0px 0px 20px 0px;
 }
 
 .button {

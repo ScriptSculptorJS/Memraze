@@ -44,7 +44,7 @@ function NewPost(props) {
   return(
     <div className='newPostContainer'>
       <Button variant="primary" className='postButton' onClick={() => handleShow()}>
-        Add a new post
+        Add a new post &nbsp; +
       </Button>
 
       <Modal show={show} onHide={() => handleClose()}>

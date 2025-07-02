@@ -14,14 +14,20 @@
 }
 
 .postButton {
-  background-color: #2391EB !important;
-  border: none;
+  background-color: white !important;
+  color: #444444;
+  border: 1px solid #44444435;;
   padding: 3px 10px;
   font-size: 13px;
 }
 
 .postButton:hover {
-  background-color: #0162f3 !important;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  background-color: white !important;
+  color: #444444;
+  border: 1px solid #44444435;;
+  padding: 3px 10px;
+  font-size: 13px;
 }
 
 .postButton:focus,
