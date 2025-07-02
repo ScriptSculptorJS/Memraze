@@ -1,8 +1,15 @@
 import mongoose from 'mongoose';
 
+const postSchema = new mongoose.Schema({
+  title: String,
+  content: String,
+  date: String
+})
+
 const tabSchema = new mongoose.Schema({
   title: String,
   description: String,
+  posts: [postSchema]
 })
 
 const userSchema = new mongoose.Schema({

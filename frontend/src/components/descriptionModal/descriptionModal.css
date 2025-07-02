@@ -9,3 +9,10 @@
 #delete-description:hover {
   cursor: pointer;
 }
+
+.button:focus,
+.button:active {
+  outline: none;
+  box-shadow: none;
+  background-color: #2391EB;
+}

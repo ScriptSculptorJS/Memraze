@@ -4,6 +4,7 @@ import Tab from 'react-bootstrap/Tab';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import './tab-info.css';
+import NewPost from '../newPost/NewPost.jsx';
 import Post from '../post/Post.jsx';
 import { useUserStore } from '../../store/user.jsx';
 import { useInfoStore } from '../../store/info.ts';
@@ -26,7 +27,7 @@ function TabInfo() {
   let newDescriptionArray = [];
 
   //For testing purposes only
-  const testTabsArray = [{
+  /*const testTabsArray = [{
     title: 'Fishing',
     description: 'Record of all my fishing adventures!',
     posts: [
@@ -66,23 +67,26 @@ function TabInfo() {
           className='tab-text'
         >
           <h6>{testTabsArray[i].description}</h6>
+          <NewPost tabNumber={i}/>
           <Post posts={testTabsArray[i].posts}/>
         </Tab.Pane>
     )
-  }
+  }*/
 
   //Goes through the tabs array and renders html for each tab's description pane
-  /*for (let i = 0; i < tabs.length; i++) {
+  for (let i = 0; i < tabs.length; i++) {
     newDescriptionArray.push(
         <Tab.Pane 
           key={i + 1}
           eventKey={i + 1} 
           className='tab-text'
         >
-          {tabs[i].description}
+          <h6>{tabs[i].description}</h6>
+          <NewPost tabNumber={i} />
+          <Post posts={tabs[i].posts} />
         </Tab.Pane>
     )
-  }*/
+  }
   
   //Updates user's new tab in the db, updates the tabs array in the Info store, and reloads the page
   const handleNewTab = async () => {

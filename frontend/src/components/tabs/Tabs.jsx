@@ -16,8 +16,8 @@ function Tabs() {
   let newTabsArray = [];
 
   //For testing purposes only
-  const testTabsArray = [{
-    title: 'Fishings',
+  /*const testTabsArray = [{
+    title: 'Fishing trips I have gone on',
     description: 'Record of all my fishing adventures',
     posts: [
       {
@@ -54,16 +54,16 @@ function Tabs() {
           <Nav.Link  eventKey={i + 1} className='tab-title'><span className='title'>{testTabsArray[i].title} </span><span className='delete-tab' onClick={() => handleDeleteTab(testTabsArray[i].title)}>x</span></Nav.Link>
         </Nav.Item>
     )
-  };
+  };*/
   
   //Takes the tabs that the user has and renders a new tab for each one
-  /*for (let i = 0; i < tabs.length; i++) {
+  for (let i = 0; i < tabs.length; i++) {
     newTabsArray.push(
         <Nav.Item key={i + 1}>
           <Nav.Link  eventKey={i + 1} className='tab-title'><span className='title'>{tabs[i].title} </span><span className='delete-tab' onClick={() => handleDeleteTab(tabs[i].title)}>x</span></Nav.Link>
         </Nav.Item>
     )
-  };*/
+  };
 
   //Deletes the selected tab from the db, and updates the tabs value in the Info Store with the new tabs array. Then, reloads the page to show tab was removed
   const handleDeleteTab = async (title) => {
@@ -77,7 +77,7 @@ function Tabs() {
   }
 
   return(
-    <Col sm={3} lg={2} className='tab-container vh-100'>
+    <Col sm={3} lg={2} className='tab-container min-vh-100'>
       <p className='mt-3 collection'>
         Your Collection
       </p>

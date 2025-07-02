@@ -107,6 +107,18 @@ export const updateUser = async (req, res) => {
           }
         }
       }, { new: true })
+    } else if (newInfo.requestType === 'post') {
+      console.log('We are in the backend just before updaing the users post in a tab', newInfo.newObject);
+      console.log(newInfo.index);
+
+      updatedInfo = await User.findByIdAndUpdate(id, {
+        $push: {
+            [`tabs.${newInfo.index}.posts`]: {
+              $each: [newInfo.newObject],
+              $position: 0
+            }
+          }
+        }, {new: true})
     }
     res.status(200).json({ success: true, data: updatedInfo });
 

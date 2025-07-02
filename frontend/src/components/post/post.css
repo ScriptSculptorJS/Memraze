@@ -1,5 +1,10 @@
 .text-center {
   margin-bottom: 20px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.card-header {
+  background-color: hsla(12, 76%, 61%, 0.236);
 }
 
 .card-title {

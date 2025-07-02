@@ -20,6 +20,7 @@ function Post(props) {
         <Card.Header>{posts[i].date}</Card.Header>
         <Card.Body>
           <Card.Title>"{posts[i].title}"</Card.Title>
+          <hr className='breaker'/>
           <Card.Text>
             {posts[i].content}
           </Card.Text>
