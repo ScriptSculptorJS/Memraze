@@ -34,4 +34,9 @@
 .postButton:active {
   outline: none;
   box-shadow: none;
+  background-color: white !important;
+  color: #444444;
+  border: 1px solid #44444435;;
+  padding: 3px 10px;
+  font-size: 13px;
 }

@@ -6,6 +6,19 @@
 .card-header {
   /*background-color: hsla(12, 76%, 61%, 0.236);*/
   background-color: #2a9d9016;
+  display: flex;
+  flex-direction: row;
+}
+
+.delete-post {
+  margin-left: auto;
+  color: #44444456 !important;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 }
 
 .card-title {

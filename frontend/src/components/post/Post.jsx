@@ -17,7 +17,9 @@ function Post(props) {
   for (let i = 0; i < posts.length; i++) {
     newPostsArray.push(
       <Card className="text-center" key={i + 1}>
-        <Card.Header>{posts[i].date}</Card.Header>
+        <Card.Header>{posts[i].date}
+          <div className='delete-post'>X</div>
+        </Card.Header>
         <Card.Body>
           <Card.Title>"{posts[i].title}"</Card.Title>
           <Card.Text>
