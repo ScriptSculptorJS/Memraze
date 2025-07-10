@@ -22,12 +22,17 @@ function NewPost(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleNewPost = async () => {
+  const handleUpdateDate = () => {
+
     const todaysDate = new Date();
     const toString = todaysDate.toDateString();
     const monthDayYear = toString.replace(/^\S+\s/, '');
     
     setNewPost(newPost => ({ ...newPost, date: monthDayYear }))
+    
+  }
+
+  const handleNewPost = async () => {
 
     console.log(newPost, 'do we have a title and some content for the new post?')
     
@@ -43,7 +48,7 @@ function NewPost(props) {
 
   return(
     <div className='newPostContainer'>
-      <Button variant="primary" className='postButton' onClick={() => handleShow()}>
+      <Button variant="primary" className='postButton' onClick={() => {handleShow(); handleUpdateDate()}}>
         Add a new post &nbsp; +
       </Button>
 

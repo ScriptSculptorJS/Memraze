@@ -87,7 +87,7 @@ function TabInfo() {
           </div>
           <hr/>
           <NewPost tabNumber={i} />
-          <Post posts={tabs[i].posts} />
+          <Post posts={tabs[i].posts} index={i} />
         </Tab.Pane>
     )
   }

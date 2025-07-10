@@ -43,7 +43,7 @@ export const useUserStore = create((set) => ({
       return{ message: err.response.data, status: err.response.status}
     }
   },
-  updateUser: async (newInfo, requestType, index) => {
+  updateUser: async (newInfo, requestType, index, updatedInfo) => {
     try {
       console.log(newInfo, 'Is the tab info showing up here before making the axios request?');
       console.log('We are here now! Just before requesting to update data')
@@ -53,7 +53,8 @@ export const useUserStore = create((set) => ({
       const res = await axios.put('http://localhost:5000/api/users', {
         newObject: newInfo,
         requestType,
-        index
+        index,
+        updatedInfo
       })
 
       console.log(res, 'This is info from the update put request');

@@ -107,8 +107,16 @@ export const updateUser = async (req, res) => {
           }
         }
       }, { new: true })
+    } else if (newInfo.requestType === 'delete post') {
+      updatedInfo = await User.findByIdAndUpdate(id, {
+        $pull: {
+          [`tabs.${newInfo.index}.posts`]: {
+            title: newInfo.newObject
+          }
+        }
+      }, { new: true })
     } else if (newInfo.requestType === 'post') {
-      console.log('We are in the backend just before updaing the users post in a tab', newInfo.newObject);
+      console.log('We are in the backend just before updating the users post in a tab', newInfo.newObject);
       console.log(newInfo.index);
 
       updatedInfo = await User.findByIdAndUpdate(id, {
@@ -119,11 +127,22 @@ export const updateUser = async (req, res) => {
             }
           }
         }, {new: true})
+    } else if (newInfo.requestType === 'update post') {
+
+      console.log(newInfo.index, newInfo.newObject, newInfo.updatedInfo)
+      updatedInfo = await User.findByIdAndUpdate(id, {
+        $set: {
+          [`tabs.${newInfo.index}.posts.${newInfo.updatedInfo.postId}.title`]: newInfo.updatedInfo.title,
+          [`tabs.${newInfo.index}.posts.${newInfo.updatedInfo.postId}.content`]: newInfo.updatedInfo.content
+        }
+      }, { new: true })
     }
+    console.log(updatedInfo)
     res.status(200).json({ success: true, data: updatedInfo });
 
   } catch (error) {
-    res.status(500).json({ success: false, message: 'Server error'});
+    console.log(error)
+    res.status(500).json({ success: false, message: 'Server error' });
   }
 }
 

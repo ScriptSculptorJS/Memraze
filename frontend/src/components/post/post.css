@@ -12,7 +12,46 @@
 
 .delete-post {
   margin-left: auto;
+  padding: 0px 7px;
   color: #44444456 !important;
+  position: relative;
+}
+
+.delete-post:hover {
+  cursor: pointer;
+}
+
+.postOptions {
+  border: 1px solid #4444446a;
+  position: absolute;
+  z-index: 100px;
+  background-color: white;
+  color: #444444;
+  border-radius: 3px;
+}
+
+.hidden {
+  display: none;
+}
+
+ul {
+  list-style-type: none;
+  text-align: start;
+  margin: 0px;
+  padding: 0px;
+}
+
+li { 
+  padding: 0px 5px;
+}
+
+li:hover {
+  background-color: #4444440c;
+  color: #444444;
+}
+
+.delete { 
+  border-top: 1px solid #4444446a;
 }
 
 .card-body {

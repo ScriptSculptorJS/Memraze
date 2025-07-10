@@ -21,14 +21,14 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 85px;
+  width: 90px;
   padding: 0px;
 }
 
 .nav-link.active {
   background-color: #2a9d8f !important;
   color: white !important;
-  max-width: 25ch !important;
+  /*max-width: 25ch !important;*/
 }
 
 .nav-link.active .delete-tab {
