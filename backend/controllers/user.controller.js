@@ -136,7 +136,15 @@ export const updateUser = async (req, res) => {
           [`tabs.${newInfo.index}.posts.${newInfo.updatedInfo.postId}.content`]: newInfo.updatedInfo.content
         }
       }, { new: true })
+    } else if (newInfo.requestType === 'update tab') {
+      updatedInfo = await User.findByIdAndUpdate(id, {
+        $set: {
+          [`tabs.${newInfo.index}.title`]: newInfo.newObject.title,
+          [`tabs.${newInfo.index}.description`]: newInfo.newObject.description
+        }
+      }, { new: true })
     }
+
     console.log(updatedInfo)
     res.status(200).json({ success: true, data: updatedInfo });
 

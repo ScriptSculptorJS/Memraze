@@ -66,6 +66,7 @@
   width: 20px;
   text-align: center;
   border-radius: 10px;
+  position: relative;
 }
 
 .delete-tab:hover {
@@ -74,4 +75,14 @@
   width: 20px;
   text-align: center;
   border-radius: 10px;
+}
+
+.tabOptions {
+  border: 1px solid #4444446a;
+  position: absolute;
+  z-index: 100;
+  background-color: white;
+  color: #444444;
+  border-radius: 3px;
+  left: 8px;
 }

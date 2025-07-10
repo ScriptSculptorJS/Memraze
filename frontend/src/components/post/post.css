@@ -24,7 +24,7 @@
 .postOptions {
   border: 1px solid #4444446a;
   position: absolute;
-  z-index: 100px;
+  z-index: 100;
   background-color: white;
   color: #444444;
   border-radius: 3px;

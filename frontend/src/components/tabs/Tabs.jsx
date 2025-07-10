@@ -1,19 +1,36 @@
+import { useState } from 'react';
 import Col from 'react-bootstrap/Col';
-import Nav from 'react-bootstrap/Nav';import './tabs.css';
+import Nav from 'react-bootstrap/Nav';
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import './tabs.css';
 import { useInfoStore } from '../../store/info.ts';
 import { useUserStore } from '../../store/user.jsx';
 import { shallow } from 'zustand/shallow';
 import './tabs.css';
 
 function Tabs() {
+  const [ updatedTab, setUpdatedTab ] = useState({
+    title: '',
+    description: '',
+  })
+
+  const [ show, setShow ] = useState(false);
+  const [ showAlert, setShowAlert ] = useState(false);
   //Accessing properties and methods from Info and User Stores and declaring type and giving it a value
   const tabs = useInfoStore(state => state.tabs, shallow);
   const updateTabs = useInfoStore(state => state.updateTabs);
   const updateUser = useUserStore(state => state.updateUser);
-  const type = 'delete tab';
+  let type;
   
   //Declaring and giving the value of an empty array for later use
   let newTabsArray = [];
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const handleCloseAlert = () => setShowAlert(false);
+  const handleShowAlert = () => setShowAlert(true);
 
   //For testing purposes only
   /*const testTabsArray = [{
@@ -57,16 +74,103 @@ function Tabs() {
   };*/
   
   //Takes the tabs that the user has and renders a new tab for each one
+
+  const handleShowTabOptions = (i) => {
+
+    const optionListContainerElement = document.getElementById(`${i}`);
+
+    const optionsButtonElement = document.getElementsByClassName('delete-tab')[i];
+    
+    if (optionListContainerElement.classList.contains('hidden')) {
+
+      optionListContainerElement.classList.remove('hidden');
+
+      document.addEventListener('click', e => {
+
+        if (e.target !== optionListContainerElement && e.target !== optionsButtonElement) {
+
+          optionListContainerElement.classList.add('hidden');
+
+        }
+      })
+    } else {
+
+      optionListContainerElement.classList.add('hidden');
+
+    }
+  }
+
   for (let i = 0; i < tabs.length; i++) {
     newTabsArray.push(
         <Nav.Item key={i + 1}>
-          <Nav.Link  eventKey={i + 1} className='tab-title'><span className='title'>{tabs[i].title} </span><span className='delete-tab' onClick={() => handleDeleteTab(tabs[i].title)}>x</span></Nav.Link>
+          <Nav.Link  eventKey={i + 1} className='tab-title'><span className='title'>{tabs[i].title} </span><span className='delete-tab' onClick={() => handleShowTabOptions(i)}>
+          &#8942;
+            <div className='tabOptions hidden' id={i}>
+              <ul>
+                <li onClick={() => {handleShow(tabs[i].title), setUpdatedTab({...updatedTab, title: tabs[i].title, description: tabs[i].description});
+                }}>
+                  Edit
+                </li>
+                <li className='delete' onClick={() => handleShowAlert()}>
+                  Delete
+                </li>
+              </ul>
+            </div>
+          </span></Nav.Link>
+          <Modal show={show} className={tabs[i].title} onHide={() => handleClose()}>
+            <Modal.Header closeButton>
+              <Modal.Title>Update tab information</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Form>
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                  <Form.Label>Tab title</Form.Label>
+                  <Form.Control
+                    type="title"
+                    value={updatedTab.title}
+                    onChange={e => setUpdatedTab({ ...updatedTab, title: e.target.value })}
+                    autoFocus
+                  />
+                </Form.Group>
+                <Form.Group
+                  className="mb-3"
+                  controlId="exampleForm.ControlTextarea1"
+                >
+                  <Form.Label>Tab description</Form.Label>
+                  <Form.Control as="textarea" rows={3} value={updatedTab.description}
+                  onChange={e => setUpdatedTab({ ...updatedTab, description: e.target.value})} />
+                </Form.Group>
+              </Form>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={() => handleClose()}>
+                Close
+              </Button>
+              <Button variant="primary" onClick={() => {handleClose(); handleUpdatedTab(i)}}>
+                Save Changes
+              </Button>
+            </Modal.Footer>
+          </Modal>
+          <Modal show={showAlert} className={tabs[i].title} onHide={() => handleCloseAlert()}>
+            <Modal.Header closeButton>
+              <Modal.Title>Are you sure you want to delete this tab?</Modal.Title>
+            </Modal.Header>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={() => handleCloseAlert()}>
+                No
+              </Button>
+              <Button variant="primary" onClick={() => {handleCloseAlert(); handleDeleteTab(tabs[i].title)}}>
+                Yes
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </Nav.Item>
     )
   };
 
   //Deletes the selected tab from the db, and updates the tabs value in the Info Store with the new tabs array. Then, reloads the page to show tab was removed
   const handleDeleteTab = async (title) => {
+    type = 'delete tab';
     const res = await updateUser(title, type);
     console.log(res, 'what are we getting within the tabs component as the response?')
     
@@ -74,6 +178,17 @@ function Tabs() {
     updateTabs(updatedTabsArray);
 
     window.location.reload();
+  }
+
+  const handleUpdatedTab = async (i) => {
+    type = 'update tab';
+
+    const res = await updateUser(updatedTab, type, i);
+
+    const updatedTabsArray = res.data.data.tabs;
+
+    updateTabs(updatedTabsArray);
+
   }
 
   return(

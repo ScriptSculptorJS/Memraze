@@ -43,7 +43,7 @@ function Post(props) {
   }
 
   const handleUpdatedPost = async () => {
-    console.log(updatedPost.postId);
+    
     type = 'update post'
     const res = await updateUser(updatedPost.postId, type, index, updatedPost);
 
@@ -79,7 +79,7 @@ function Post(props) {
         </Card.Body>
         <Modal show={show} className={posts[i].title} onHide={() => handleClose()}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>Update post information</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form>
