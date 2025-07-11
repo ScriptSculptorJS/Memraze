@@ -17,6 +17,7 @@ function Post(props) {
   const index = props.index;
   
   const [ show, setShow ] = useState(false);
+  const [ showPostAlert, setShowPostAlert ] = useState(false);
   const [ updatedPost, setUpdatedPost ] = useState({
     title: '',
     content: '',
@@ -25,16 +26,18 @@ function Post(props) {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleCloseAlert = () => setShowPostAlert(false);
+  const handleShowPostAlert = () => setShowPostAlert(true);
 
   let newPostsArray = [];
   const updateUser = useUserStore(state => state.updateUser);
   const updateTabs = useInfoStore(state => state.updateTabs);
   let type;
 
-  const handleDeletePost = async (title) => {
-    console.log(title);
+  const handleDeletePost = async () => {
+    
     type = 'delete post';
-    const res = await updateUser(title, type, index);
+    const res = await updateUser(updatedPost.title, type, index);
 
     const newTabsArray = res.data.data.tabs;
     updateTabs(newTabsArray);
@@ -64,7 +67,7 @@ function Post(props) {
                 }}>
                   Edit
                 </li>
-                <li className='delete' onClick={() => handleDeletePost(posts[i].title)}>
+                <li className='delete' onClick={() => {handleShowPostAlert(); setUpdatedPost({...updatedPost, title: posts[i].title, content: posts[i].content})}}>
                   Delete
                 </li>
               </ul>
@@ -111,12 +114,26 @@ function Post(props) {
             </Button>
           </Modal.Footer>
         </Modal>
+
+        <Modal show={showPostAlert} className={posts[i].title} onHide={() => handleCloseAlert()}>
+          <Modal.Header closeButton>
+            <Modal.Title>Are you sure you want to delete this post?</Modal.Title>
+          </Modal.Header>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => handleCloseAlert()}>
+              No
+            </Button>
+            <Button variant="primary" onClick={() => {handleCloseAlert(); handleDeletePost()}}>
+              Yes
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </Card>
     )
   }
 
   const handleShowList = (i) => {
-    const listContainerElement = document.getElementById(`${i}`);
+    const listContainerElement = document.getElementsByClassName('postOptions')[i];
     const optionsButtonElement = document.getElementsByClassName('delete-post')[i];
 
     if (listContainerElement.classList.contains('hidden')) {

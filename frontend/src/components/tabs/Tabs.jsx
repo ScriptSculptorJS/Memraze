@@ -75,30 +75,7 @@ function Tabs() {
   
   //Takes the tabs that the user has and renders a new tab for each one
 
-  const handleShowTabOptions = (i) => {
-
-    const optionListContainerElement = document.getElementById(`${i}`);
-
-    const optionsButtonElement = document.getElementsByClassName('delete-tab')[i];
-    
-    if (optionListContainerElement.classList.contains('hidden')) {
-
-      optionListContainerElement.classList.remove('hidden');
-
-      document.addEventListener('click', e => {
-
-        if (e.target !== optionListContainerElement && e.target !== optionsButtonElement) {
-
-          optionListContainerElement.classList.add('hidden');
-
-        }
-      })
-    } else {
-
-      optionListContainerElement.classList.add('hidden');
-
-    }
-  }
+  
 
   for (let i = 0; i < tabs.length; i++) {
     newTabsArray.push(
@@ -111,7 +88,7 @@ function Tabs() {
                 }}>
                   Edit
                 </li>
-                <li className='delete' onClick={() => handleShowAlert()}>
+                <li className='delete' onClick={() => {handleShowAlert(); setUpdatedTab({...updatedTab, title: tabs[i].title, description: tabs[i].description})}}>
                   Delete
                 </li>
               </ul>
@@ -159,7 +136,7 @@ function Tabs() {
               <Button variant="secondary" onClick={() => handleCloseAlert()}>
                 No
               </Button>
-              <Button variant="primary" onClick={() => {handleCloseAlert(); handleDeleteTab(tabs[i].title)}}>
+              <Button variant="primary" onClick={() => {handleCloseAlert(); handleDeleteTab()}}>
                 Yes
               </Button>
             </Modal.Footer>
@@ -168,10 +145,35 @@ function Tabs() {
     )
   };
 
+  const handleShowTabOptions = (i) => {
+
+    const optionListContainerElement = document.getElementsByClassName('tabOptions')[i];
+    
+    const tabOptionsButtonElement = document.getElementsByClassName('delete-tab')[i];
+    
+    if (optionListContainerElement.classList.contains('hidden')) {
+
+      optionListContainerElement.classList.remove('hidden');
+
+      document.addEventListener('click', e => {
+
+        if (e.target !== optionListContainerElement && e.target !== tabOptionsButtonElement) {
+
+          optionListContainerElement.classList.add('hidden');
+
+        }
+      })
+    } else {
+
+      optionListContainerElement.classList.add('hidden');
+
+    }
+  }
+
   //Deletes the selected tab from the db, and updates the tabs value in the Info Store with the new tabs array. Then, reloads the page to show tab was removed
-  const handleDeleteTab = async (title) => {
+  const handleDeleteTab = async () => {
     type = 'delete tab';
-    const res = await updateUser(title, type);
+    const res = await updateUser(updatedTab.title, type);
     console.log(res, 'what are we getting within the tabs component as the response?')
     
     const updatedTabsArray = res.data.data.tabs;
