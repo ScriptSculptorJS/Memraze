@@ -1,5 +1,6 @@
 # Memraze
 Want to keep a record of all of your interest/hobbies, the good and the bad, all in one place? Memraze has exactly what you need. Try it out for yourself!
+![Memraze](frontend/src/assets/Memraze.jpg)
 ## Table of Contents
 * [Motivation](#motivation)
 * [Built With](#built-with)
