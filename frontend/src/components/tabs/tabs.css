@@ -1,11 +1,11 @@
 .tab-container {
   background-color: white !important;
   border-radius: 8px;
-  padding: 0px 9px 5px 9px !important;
+  padding: 3px 9px 5px 9px !important;
 }
 
 .collection {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   color: #444444;
 }
 

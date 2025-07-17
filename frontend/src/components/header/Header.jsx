@@ -12,9 +12,9 @@ function Header() {
       <div className='profile-image-container'>
         <img src={userProfileImage} className='profileImage'/>
       </div>
-      <h4>
+      <h3>
         {userFirstName}
-      </h4>
+      </h3>
       <DescriptionModal />
     </div>
   )

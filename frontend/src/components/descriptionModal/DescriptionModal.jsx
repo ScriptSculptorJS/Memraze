@@ -57,7 +57,7 @@ function DescriptionModal() {
     )
   } else if (description !== '') {
     activeCard = [].concat(
-      <div key='2' className='js-user-description-card' 
+      <div key='2' className='js-user-description-card user-description-card' 
       style={{color: '#444444'}}>
         {description}&nbsp; <span id='delete-description' 
         onClick={() => handleDeleteDescription()}>x</span>
