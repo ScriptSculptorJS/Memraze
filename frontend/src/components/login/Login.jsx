@@ -39,7 +39,7 @@ function Login() {
 
     if (!success) {
       console.log(`${status} Error: ${statusMessage}`);
-      alert(`Status: ${status}. Error: ${message}`)
+      alert(`Status: ${status} | Error: ${message}`)
     } else {
       updateFirstName(data.firstName);
       updateProfileImage(defaultImage)
@@ -68,11 +68,11 @@ function Login() {
       e.preventDefault();
     }
     
-    const { success, message, data } = await createUser(newUser);
+    const { success, message, data, status, statusMessage } = await createUser(newUser);
 
     if (!success) {
       console.log(`${status} Error: ${statusMessage}`);
-      alert(`Status: ${status}. Error: ${message}`)
+      alert(`Status: ${status} | Error: ${message}`)
     } else {
       setNewUser({
         firstName: '',
