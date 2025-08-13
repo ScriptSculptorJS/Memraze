@@ -33,14 +33,14 @@ function Login() {
     }
 
     const { success, message, data, status, statusMessage } = await loginUser(newUser);
-    
-    localStorage.clear();
-    
 
     if (!success) {
+
       console.log(`${status} Error: ${statusMessage}`);
       alert(`Status: ${status} | Error: ${message}`)
+
     } else {
+
       updateFirstName(data.firstName);
       updateProfileImage(defaultImage)
       updateTabs(data.tabs);
@@ -74,11 +74,6 @@ function Login() {
       console.log(`${status} Error: ${statusMessage}`);
       alert(`Status: ${status} | Error: ${message}`)
     } else {
-      setNewUser({
-        firstName: '',
-        email: '',
-        password: '',
-      });
 
       Switch();
 

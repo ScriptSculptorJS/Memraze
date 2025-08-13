@@ -15,6 +15,7 @@ function Tabs() {
     title: '',
     description: '',
   })
+  const [ tabIndex, setTabIndex ] = useState()
 
   const [ show, setShow ] = useState(false);
   const [ showAlert, setShowAlert ] = useState(false);
@@ -85,6 +86,7 @@ function Tabs() {
             <div className='tabOptions hidden' id={i}>
               <ul>
                 <li onClick={() => {handleShow(tabs[i].title), setUpdatedTab({...updatedTab, title: tabs[i].title, description: tabs[i].description});
+                setTabIndex(i);
                 }}>
                   Edit
                 </li>
@@ -123,7 +125,7 @@ function Tabs() {
               <Button variant="secondary" onClick={() => handleClose()}>
                 Close
               </Button>
-              <Button variant="primary" onClick={() => {handleClose(); handleUpdatedTab(i)}}>
+              <Button variant="primary" onClick={() => {handleClose(); handleUpdatedTab(tabIndex)}}>
                 Save Changes
               </Button>
             </Modal.Footer>
@@ -183,6 +185,7 @@ function Tabs() {
   }
 
   const handleUpdatedTab = async (i) => {
+    console.log('what is the index', i)
     type = 'update tab';
 
     const res = await updateUser(updatedTab, type, i);
